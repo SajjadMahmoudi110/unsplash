@@ -24,3 +24,7 @@ def get_unsplash_photos(username, access_key):
         page += 1
 
     return all_photos
+    
+    ..
+
+#function to save photoes
