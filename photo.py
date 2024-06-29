@@ -7,6 +7,16 @@ import json
 Accept = os.getenv('UNSPLASH_Accept')
 USERNAME = os.getenv('UNSPLASH_USERNAME')
 
+http_proxy  = "http://10.10.1.10:3128"
+https_proxy = "https://10.10.1.11:1080"
+ftp_proxy   = "ftp://10.10.1.10:3128"
+
+proxies = { 
+              "http"  : http_proxy, 
+              "https" : https_proxy, 
+              "ftp"   : ftp_proxy
+            }
+
 # Check if Accept and USERNAME are set
 if not Accept or not USERNAME:
     print("Please set the UNSPLASH_Accept and UNSPLASH_USERNAME environment variables.")
@@ -28,7 +38,7 @@ def get_unsplash_photos(username, Accept):
             'per_page': per_page,
             'stats': 'true'
         }
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, proxies=proxies)
         if response.status_code != 200:
             print(f"Error: {response.status_code}")
             break
