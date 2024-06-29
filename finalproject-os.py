@@ -55,8 +55,11 @@ with open("{0}.csv".format(filename), 'r') as csvfile:
         splitted_line = line.split(',')
         # check if we have an image URL
         if splitted_line[1] != '' and splitted_line[1] != "\n":
-            urllib.request.urlretrieve(splitted_line[1], "img_" + str(i) + ".png")
-            print ("Image saved for {0}".format(splitted_line[0]))
+            try:
+                urllib.request.urlretrieve(splitted_line[1], "img_" + str(i) + ".png")
+                print ("Image saved for {0}".format(splitted_line[0]))
+            except:
+                print ("No result for {0}".format(splitted_line[0]))
             i += 1
         else:
             print ("No result for {0}".format(splitted_line[0]))
