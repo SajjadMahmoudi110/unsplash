@@ -1,12 +1,8 @@
 from bs4 import BeautifulSoup
 from time import sleep
-import urllib.request
-import pandas as pd
 import requests
 import urllib
-import base64
 import csv
-import time
 
 # Proxy settings (if required)
 http_proxy = "http://10.10.1.10:3128"
@@ -30,8 +26,9 @@ headers = {
     
 #go to website
 page = "https://unsplash.com/"
-r = requests.get(page, proxies=proxies)
+r = requests.get(page)
 soup = BeautifulSoup(r.text, "html.parser")
+
 # Gets srcs from all <img> from site 
 srcs = [img['src'] for img in soup.findAll('img')]
 
@@ -54,7 +51,7 @@ filename = "output"
 with open("{0}.csv".format(filename), 'r') as csvfile:
     # iterate on all lines
     i = 0
-    for line in csvfile:
+    for line in  csvfile:
         splitted_line = line.split(',')
         # check if we have an image URL
         if splitted_line[1] != '' and splitted_line[1] != "\n":
