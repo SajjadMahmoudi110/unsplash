@@ -8,6 +8,17 @@ import base64
 import csv
 import time
 
+# Proxy settings (if required)
+http_proxy = "http://10.10.1.10:3128"
+https_proxy = "https://10.10.1.11:1080"
+ftp_proxy = "ftp://10.10.1.10:3128"
+
+proxies = {
+    "http": http_proxy,
+    "https": https_proxy,
+    "ftp": ftp_proxy
+}
+
 
 # Get site
 headers = {
@@ -19,7 +30,7 @@ headers = {
     
 #go to website
 page = "https://unsplash.com/"
-r = requests.get(page)
+r = requests.get(page, proxies=proxies)
 soup = BeautifulSoup(r.text, "html.parser")
 # Gets srcs from all <img> from site 
 srcs = [img['src'] for img in soup.findAll('img')]
